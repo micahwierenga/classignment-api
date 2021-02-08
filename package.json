@@ -1,0 +1,35 @@
+{
+  "name": "myass",
+  "version": "1.0.0",
+  "description": "A homework app that works with the Canvas Instructure API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micahwierenga/myass.git"
+  },
+  "author": "Micah Wierenga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micahwierenga/myass/issues"
+  },
+  "homepage": "https://github.com/micahwierenga/myass#readme",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^3.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.0.1",
+    "express-rate-limit": "^5.2.3",
+    "express-session": "^1.17.1",
+    "helmet": "^4.2.0",
+    "json-bigint": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.8",
+    "mongoose-morgan": "^1.0.16"
+  }
+}

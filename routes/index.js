@@ -1,3 +1,4 @@
 module.exports = {
-    courses: require('./courses')
+    courses: require('./courses'),
+    auth: require('./auth'),
 }

@@ -48,21 +48,7 @@ const { Assignment } = require('../models');
 
 const index = async (req, res) => {
     try {
-        const coursesData = [];
-        for(let i = 0; i < courses.length; i++) {
-            const d = await axios.get(`${BASE_URL}/courses/${courses[i].api_id}`, {
-                headers: {
-                    'Authorization': `Bearer ${BEARER_TOKEN}`
-                },
-                transformResponse: data => JSONbig.parse(data),
-            })
-
-            const course = {...d.data, ...courses[i]}
-            coursesData.push(course);
-        }
-
-        res.json({ courses: coursesData });
-        
+        res.json({ courses });
     } catch (error) {
         console.log('error:', error.response);
         res.json({error});
@@ -72,7 +58,7 @@ const index = async (req, res) => {
 const getCourseAssignments = async (req, res) => {
     try {
         const savedAssignments = await Assignment.find();
-        console.log('savedAssignments:', savedAssignments);
+
         let assignments = await axios.get(`${BASE_URL}/courses/${req.params.courseId}/assignments`, {
             headers: {
                 'Authorization': `Bearer ${BEARER_TOKEN}`
@@ -103,13 +89,10 @@ const getCourseAssignments = async (req, res) => {
 
 const markAuthorization = (assignmentGroups, assignments) => {
     return assignments.map(assignment => {
-        const foundGroup = assignmentGroups.find(group => {
-            console.log('assignment:', assignment);
-            console.log('group:', group);
-            return assignment.assignment_group_id === group.id
-        });
+        const foundGroup = assignmentGroups.find(group => assignment.assignment_group_id === group.id);
 
-        assignment.can_access = foundGroup.authorized;
+        assignment.can_access = foundGroup ? foundGroup.authorized : 'No group found';
+
         return assignment;
     })
 }
@@ -131,9 +114,7 @@ const filterIncompleteAssignments = async retrieved => {
         const savedAssignments = await Assignment.find();
 
         return retrieved.filter(assignment => {
-            const foundAssignment = savedAssignments.find(savedAssignment => {
-                return savedAssignment.assignmentId === assignment.id
-            });
+            const foundAssignment = savedAssignments.find(savedAssignment => savedAssignment.assignmentId === assignment.id);
             return !foundAssignment.completed;
         })
     } catch (error) {
@@ -144,7 +125,7 @@ const filterIncompleteAssignments = async retrieved => {
 const markAssignmentComplete = async (req, res) => {
     try {
         const updatedAssignment = await Assignment.findOneAndUpdate({ assignmentId: req.params.assignmentId }, { completed: true }, {new: true});
-        console.log('updatedAssignment:', updatedAssignment);
+
         res.json({ updatedAssignment });
     } catch (error) {
         console.log('[markAssignmentComplete] error:', error);
@@ -161,17 +142,13 @@ const getAssignmentSubmission = async (req, res) => {
             transformResponse: data => JSONbig.parse(data),
         })
         
-        // const fullAssignments = await getAssignmentSubmissions(assignments.data);
-        console.log('submission:', submission);
         res.json({ submission: submission.data });
     } catch (error) {
         console.log('error:', error.response);
-        // console.log('error:', error.response.statusCode);
         res.json({error: error.response});
     }
     
 }
-
 
 module.exports = {
     index,

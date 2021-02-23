@@ -73,6 +73,7 @@ app.use(
 // Auth Routes
 
 app.use('/api/v1/courses', routes.courses);
+app.use("/api/v1/auth", routes.auth);
 
 // response middleware
 app.get('/*', notFound);

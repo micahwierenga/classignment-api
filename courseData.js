@@ -83,6 +83,10 @@ module.exports = [
                 name: 'Coursework',
                 authorized: true,
             }, {
+                id: '148030000000007154',
+                name: 'Class Participation',
+                authorized: true,
+            }, {
                 id: '148030000000007155',
                 name: 'Final Demonstration of Knowledge',
                 authorized: false,
@@ -127,6 +131,11 @@ module.exports = [
             {
                 id: '148030000000003694',
                 name: 'Coursework',
+                authorized: true,
+            },
+            {
+                id: '148030000000007054',
+                name: 'Performance Assessments',
                 authorized: true,
             },
             {

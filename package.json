@@ -4,7 +4,8 @@
   "description": "A homework app that works with the Canvas Instructure API",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "json-bigint": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.8",
-    "mongoose-morgan": "^1.0.16"
+    "mongoose-morgan": "^1.0.16",
+    "nodemon": "^2.0.7"
   }
 }
